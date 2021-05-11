@@ -17,48 +17,35 @@ ORGANIZATION:
     REVISION: ---
 
 ==============================================================================="""
+import os
+from os import path
+
 
 class Input:
     def __init__(self,):
         self._id = 0
+        self._dropdowns = {}
+        for fn in os.listdir("data/dropdowns"):
+            if fn.endswith(".txt"):
+                with open(path.join("data/dropdowns", fn)) as f:
+                    content = f.read().strip()
+                self._dropdowns[fn[:-4]] = [line.strip()
+                                            for line in content.split("\n") if len(line.strip()) > 0]
+
     def input(self):
         id_ = self._id
         self._id += 1
         return f"""<input type="text" id="{id_}" name="{id_}"></input>"""
-    def dropdown_1(self):
-        choices = """
-        普通預金
-        支払利息
-        前払利息
-        未払利息
-        次期繰越
-        前期繰越
-        損益
-        繰越利益剰余金
-        """
-        choices = choices.split("\n")
-        choices = [line.strip() for line in choices]
-        choices = [choice for choice in choices if len(choice)>0]
 
-        id_ = self._id
-        self._id += 1
-
-        res = f"<select name=\"{id_}\">"
-        for choice in choices:
-            res += f"""<option value="{choice}">{choice}</option>"""
-        res += "</select>"
+    def dropdown_names(self):
+        res = list(self._dropdowns)
+#        print(f"dropdown_names: {res}")
         return res
-    def dropdown_2(self):
-        choices = """
-        受取
-        未収
-        前愛
-        示払
-        前払
-        """
-        choices = choices.split("\n")
-        choices = [line.strip() for line in choices]
-        choices = [choice for choice in choices if len(choice)>0]
+
+    def dropdown(self, dropdown_name):
+        choices = self._dropdowns[str(dropdown_name)]
+        choices = ["",*choices]
+#        print(f"{dropdown_name} => {choices}")
 
         id_ = self._id
         self._id += 1

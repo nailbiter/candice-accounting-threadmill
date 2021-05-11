@@ -34,27 +34,17 @@ def _get_env():
 
 @app.route("/grade")
 def grade():
-    _RIGHT_ANSWER = [
-        "X2/8/31",
-        "普通",
-        "28,800",
-        "X2/4/1",
-        "未払利息",
-        "16,800",
-        *"X3/2/28 普通預金 30,000 X3/3/31 損益 47,000".split(" "),
-        *"X3/3/31 未払利息 5.000".split(" "),
-        *(["63,800"]*2),
-        "未払",
-        *"X2/4/1 支払利息 16,.800 X2/4/1 前期 繰越 16.800".split(" "),
-        *"X3/3/31 次期繰越 5.000 X3/3/31 支払利息 5,000".split(" "),
-        *(["21,800"]*2),
-    ]
+    with open("data/right_answers/1.txt") as f:
+        right_answers = f.read().strip()
+    right_answers = [line.strip() for line in right_answers.split("\n")]
+    print(right_answers)
+    print(f"{len(right_answers)} right answers")
     wrong_items = []
-    for i, a in enumerate(_RIGHT_ANSWER):
-        got,expected = str(request.args.get(str(i))), str(a)
+    for i, a in enumerate(right_answers):
+        got, expected = str(request.args.get(str(i+1))), str(a)
         if got != expected:
-            wrong_items.append((i+1,got,expected))
-    return "right" if len(wrong_items)==0 else "<br>".join(["wrong",*[f"{i}: \"{got}\" != \"{expected}\"" for i,got,expected in wrong_items]])
+            wrong_items.append((i+1, got, expected))
+    return "right" if len(wrong_items) == 0 else "<br>".join([f"wrong ({len(wrong_items)}/{len(right_answers)}={len(wrong_items)/len(right_answers)*100:.2f}%)", *[f"{i}: \"{got}\" != \"{expected}\"" for i, got, expected in wrong_items]])
 
 
 @app.route('/')
@@ -66,11 +56,12 @@ def hello_world():
 #    md_converter = markdown.Markdown(extension=["tables"])
 #    html = md_converter.convert(md)
     html = markdown.markdown(md, extensions=["tables"])
-    print(html)
+#    print(html)
     input_ = _common.Input()
     html = Template(html).render({
         "html": {
-            **{k: getattr(input_, k) for k in "input,dropdown_1,dropdown_2".split(",")},
+            "input": input_.input,
+            "dropdown":input_.dropdown,
         }
     })
     return f"""

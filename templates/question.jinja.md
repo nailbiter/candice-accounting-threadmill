@@ -28,18 +28,24 @@ X3年3月31日 決算日を迎え、未払利息を計上した。
 ## 支払利息
 |  |  | |  |  |  |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} | {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} |
-| {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} | {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} |
-| {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} | {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} |
-| {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} | {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} |
+| {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} | {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} |
+| {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} | {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} |
+| {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} | {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} |
+| {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} | {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} |
 |  |  | {{html.input()}} |  |  | {{html.input()}} |
 
-{{html.dropdown_2()}}
+{{html.dropdown(2)}} 利息
 
 |  |  | |  |  |  |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} | {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} |
-| {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} | {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} |
-| {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} | {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} |
-| {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} | {{html.input()}} | {{html.dropdown_1()}} | {{html.input()}} |
+| {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} | X2/4/1 | {{html.dropdown(1)}} | {{html.input()}} |
+| {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} | {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} |
+| {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} | {{html.input()}} | {{html.dropdown(1)}} | {{html.input()}} |
 |  |  | {{html.input()}} |  |  | {{html.input()}} |
+
+# (2) 次の各問の文章の空欄にあてはまる最も適当な語句を選択しなさい。
+
+1. すべての勘定科目を集計する表は{{html.dropdown(3)}}である。
+1. 次のものの中で補助姓にあたるものは{{html.dropdown(4)}}である。
+1. 次のものの中から現金勤定に記入するものは{{html.dropdown(5)}}である。
+1. 当社が取引先の会社から商品を受け取ったさいにもらう書類は{{html.dropdown(6)}}である。
