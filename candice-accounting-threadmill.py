@@ -24,6 +24,7 @@ from jinja2 import Template, Environment
 from jinja2.loaders import FileSystemLoader
 import markdown
 import _common
+from os import path
 
 app = Flask(__name__)
 
@@ -32,9 +33,12 @@ def _get_env():
     return Environment(loader=FileSystemLoader("templates"))
 
 
-@app.route("/grade")
-def grade():
-    with open("data/right_answers/1.txt") as f:
+@app.route("/grade/<path:question>")
+def grade(question):
+    fn = path.join("data/right_answers", question+".txt")
+    if not path.isfile(fn):
+        return f"no answer \"{question}\""
+    with open(fn) as f:
         right_answers = f.read().strip()
     right_answers = [line.strip() for line in right_answers.split("\n")]
     print(right_answers)
@@ -48,8 +52,12 @@ def grade():
 
 
 @app.route('/')
-def hello_world():
-    with open("templates/question.jinja.md") as f:
+@app.route('/<path:question>')
+def hello_world(question="1"):
+    fn = path.join("templates", question+".jinja.md")
+    if not path.isfile(fn):
+        return f"no question \"{question}\""
+    with open(fn) as f:
         md = f.read()
 #    jinja_env = _get_env()
 #    md = jinja_env.get_template("question.jinja.md")
@@ -61,11 +69,11 @@ def hello_world():
     html = Template(html).render({
         "html": {
             "input": input_.input,
-            "dropdown":input_.dropdown,
+            "dropdown": input_.dropdown,
         }
     })
     return f"""
-    <form action="grade">
+    <form action="grade/{question}">
     <!--form action="cgi-bin/formmail.cgi" method="post"-->
     {html}
     <input type="submit" value="送信">
